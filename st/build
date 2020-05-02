@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+sed -i 's|Liberation Mono|Monospace|g' config.def.h
+sed -i 's|pixelsize=12|pixelsize=18|g' config.def.h
+
+patch -p1 < st-gruvbox-dark-0.8.2.diff
+
+make
+make PREFIX=/usr DESTDIR="$1" install

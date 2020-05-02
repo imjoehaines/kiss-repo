@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# Adding this patch forces the libXft
+# dependency, but the upstream (git) already
+# uses it. It is also much better than the ancient
+# logical X font description.
+patch -p1 < tabbed-0.6-xft.diff
+
+sed -i 's|monospace\-9|monospace\-16|g' config.def.h
+
+make
+make DESTDIR="$1" PREFIX=/usr install
